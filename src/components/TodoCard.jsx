@@ -1,21 +1,34 @@
-import React from 'react'
+import { useState } from "react"
 
 export default function TodoCard(props) {
   const {children, handleDeleteTodo, todoIndex, handleEditTodo} =props
+
+  const [clicked, setClicked] = useState(false)
+
   return (
-    <li className='todoItem' >
+    <li className='todoItem'>
             <div className='actionsContainer'>
-              {children}
-              <button onClick ={()=>{
-                handleEditTodo(todoIndex)
+              <div className='item' onClick={()=>{
+                if(clicked){
+                  setClicked(false)
+                } else{
+                  setClicked(true)
+                }
               }}>
-                <i class="fa-regular fa-pen-to-square"></i>
-              </button>
-              <button onClick={()=>{
-                handleDeleteTodo(todoIndex)
-              }}>
-                <i class="fa-solid fa-trash"></i>
-              </button>
+                {clicked? <i class="fa-solid fa-square-check"></i> :<i class="fa-solid fa-square"></i>}
+          
+                {children}
+              </div>
+                <button onClick ={()=>{
+                  handleEditTodo(todoIndex)
+                }}>
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+                <button onClick={()=>{
+                  handleDeleteTodo(todoIndex)
+                }}>
+                  <i class="fa-solid fa-trash"></i>
+                </button>
               
               
             </div>
